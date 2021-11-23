@@ -34,11 +34,11 @@ class Account {
          * @param passphrase seed passphrase
          * @return Solana account
          */
-        fun fromBip32Mnemonic(words: List<String>, walletIndex: Int, passphrase: String = ""): Account {
-            val seed = MnemonicCode.toSeed(words, passphrase)
+        fun fromBip32Mnemonic(words: List<String>): Account {
+            val seed = MnemonicCode.toSeed(words, "")
             val masterPrivateKey = HDKeyDerivation.createMasterPrivateKey(seed)
             val deterministicHierarchy = DeterministicHierarchy(masterPrivateKey)
-            val child = deterministicHierarchy[HDUtils.parsePath("M/501H/${walletIndex}H/0/0"), true, true]
+            val child = deterministicHierarchy[HDUtils.parsePath("M/501H/${0}H/0/0"), true, true]
             val keyPair = TweetNaclFast.Signature.keyPair_fromSeed(child.privKeyBytes)
             return Account(keyPair)
         }
