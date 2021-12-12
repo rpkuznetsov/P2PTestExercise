@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">P2PTestExercise</string>
+    <string name="edit_text_seed_phrase_hint">Seed phrase</string>
+    <string name="button_authorize_title">Authorize</string>
 </resources>
