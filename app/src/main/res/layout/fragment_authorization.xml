@@ -22,7 +22,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/seed_phrase_text_input_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="oval you token plug copper visa employ link sell asset kick sausage" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
