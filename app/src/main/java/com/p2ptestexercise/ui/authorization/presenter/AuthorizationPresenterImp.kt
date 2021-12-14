@@ -19,8 +19,10 @@ class AuthorizationPresenterImp(
 
     override fun onAuthorizeClick(text: Editable?) {
         scope.launch {
+            view?.showLoading(true)
             val words = text?.toString()?.split(' ') ?: listOf()
             val success = authorizationInteractor.authorizeViaSeedPhrase(words)
+            view?.showLoading(false)
             if (success) view?.navigateToNextScreen()
             else view?.showAuthorizationError()
         }

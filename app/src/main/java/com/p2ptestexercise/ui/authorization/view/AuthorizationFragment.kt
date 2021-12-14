@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.p2ptestexercise.R
 import com.p2ptestexercise.databinding.FragmentAuthorizationBinding
 import com.p2ptestexercise.ui.authorization.presenter.AuthorizationPresenter
+import com.p2ptestexercise.ui.setVisible
 import org.koin.android.ext.android.inject
 
 class AuthorizationFragment : Fragment(R.layout.fragment_authorization), AuthorizationView {
@@ -35,6 +36,11 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization), Authori
         binding.authorizeButton.setOnClickListener {
             presenter.onAuthorizeClick(binding.seedPhraseTextInputEditText.text)
         }
+    }
+
+    override fun showLoading(isLoading: Boolean) {
+        binding.authorizeButton.text = if (isLoading) null else getString(R.string.button_authorize_title)
+        binding.progressBar.setVisible(isLoading)
     }
 
     override fun navigateToNextScreen() {
