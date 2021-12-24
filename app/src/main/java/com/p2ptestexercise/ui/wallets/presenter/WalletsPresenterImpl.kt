@@ -28,6 +28,15 @@ class WalletsPresenterImpl(
         }
     }
 
+    override fun updateWallets() {
+        scope.launch {
+            view?.showRefreshing(true)
+            val wallets = walletsInteractor.getWallets()
+            view?.showRefreshing(false)
+            view?.renderWallets(wallets)
+        }
+    }
+
     override fun onDetach() {
         view = null
         job.cancel()

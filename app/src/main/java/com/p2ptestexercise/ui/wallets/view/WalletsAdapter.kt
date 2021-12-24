@@ -2,17 +2,19 @@ package com.p2ptestexercise.ui.wallets.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.p2ptestexercise.R
 import com.p2ptestexercise.databinding.ItemWalletBinding
 import com.p2ptestexercise.model.ui.WalletUiModel
 import com.p2ptestexercise.util.StringService
+import com.p2ptestexercise.util.WalletsDiffCallback
 
 class WalletsAdapter(
     private val stringService: StringService
 ) : RecyclerView.Adapter<WalletsAdapter.WalletsViewHolder>() {
 
-    val items = mutableListOf<WalletUiModel>()
+    private val items = mutableListOf<WalletUiModel>()
 
     override fun getItemCount() = items.size
 
@@ -24,6 +26,14 @@ class WalletsAdapter(
 
     override fun onBindViewHolder(holder: WalletsViewHolder, position: Int) {
         holder.bind(items[position])
+    }
+
+    fun setItems(items: List<WalletUiModel>) {
+        val diffCallback = WalletsDiffCallback(items, this.items)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        this.items.clear()
+        this.items.addAll(items)
+        diffResult.dispatchUpdatesTo(this)
     }
 
     class WalletsViewHolder(
