@@ -11,7 +11,7 @@ class WalletsInteractorImpl(
 ) : WalletsInteractor {
 
     override suspend fun getWallets(): List<WalletUiModel> {
-        val authorizationData = authorizationRepository.getAuthorizationData()
+        val authorizationData = authorizationRepository.getAuthorizationData() ?: return emptyList()
         val walletsResponse = walletsRepository.fetchWallets(authorizationData)
         return walletsResponse.result.value.map(::map)
     }

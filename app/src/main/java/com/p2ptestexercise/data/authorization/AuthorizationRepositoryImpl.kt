@@ -14,9 +14,9 @@ class AuthorizationRepositoryImpl(
         }
     }
 
-    override suspend fun getAuthorizationData(): AuthorizationData {
-        val publicKey = sharedPreferences.getString(KEY_ACCOUNT_PUBLIC_KEY, "") ?: ""
-        val secretKey = sharedPreferences.getString(KEY_ACCOUNT_SECRET_KEY, "") ?: ""
+    override suspend fun getAuthorizationData(): AuthorizationData? {
+        val publicKey = sharedPreferences.getString(KEY_ACCOUNT_PUBLIC_KEY, null) ?: return null
+        val secretKey = sharedPreferences.getString(KEY_ACCOUNT_SECRET_KEY, null) ?: return null
         return AuthorizationData(publicKey, secretKey)
     }
 }
