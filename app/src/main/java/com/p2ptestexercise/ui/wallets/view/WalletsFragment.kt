@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.p2ptestexercise.R
 import com.p2ptestexercise.databinding.FragmentWalletsBinding
@@ -39,16 +41,19 @@ class WalletsFragment : Fragment(R.layout.fragment_wallets), WalletsView {
         binding.swipeToRefreshLayout.setOnRefreshListener { presenter.updateWallets() }
     }
 
-    override fun showLoading(isLoading: Boolean) {
-        binding.progressBar.setVisible(isLoading)
-    }
-
-    override fun showRefreshing(isRefreshing: Boolean) {
-        binding.swipeToRefreshLayout.isRefreshing = isRefreshing
+    override fun showLoading(isLoading: Boolean) = binding.run {
+        when {
+            binding.swipeToRefreshLayout.isRefreshing -> binding.swipeToRefreshLayout.isRefreshing = isLoading
+            else -> binding.progressBar.setVisible(isLoading)
+        }
     }
 
     override fun renderWallets(wallets: List<WalletUiModel>) {
         adapter.setItems(wallets)
+    }
+
+    override fun showError(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroy() {

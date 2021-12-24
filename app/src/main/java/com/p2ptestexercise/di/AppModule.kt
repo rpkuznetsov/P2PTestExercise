@@ -28,13 +28,13 @@ val appModule = module {
 
     single<AuthorizationPresenter> { AuthorizationPresenterImp(get()) }
 
-    single<WalletsPresenter> { WalletsPresenterImpl(get()) }
+    single<WalletsPresenter> { WalletsPresenterImpl(get(), get()) }
 
     single<MainInteractor> { MainInteractorImpl(get()) }
 
     single<AuthorizationInteractor> { AuthorizationInteractorImpl(get()) }
 
-    single<WalletsInteractor> { WalletsInteractorImpl(get(), get()) }
+    single<WalletsInteractor> { WalletsInteractorImpl(get(), get(), get()) }
 
     single<AuthorizationRepository> { AuthorizationRepositoryImpl(get()) }
 

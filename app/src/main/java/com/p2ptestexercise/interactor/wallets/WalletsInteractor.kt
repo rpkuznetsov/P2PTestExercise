@@ -1,7 +1,7 @@
 package com.p2ptestexercise.interactor.wallets
 
-import com.p2ptestexercise.model.ui.WalletUiModel
+import com.p2ptestexercise.model.ui.WalletsResult
 
 interface WalletsInteractor {
-    suspend fun getWallets(): List<WalletUiModel>
+    suspend fun getWallets(): WalletsResult
 }

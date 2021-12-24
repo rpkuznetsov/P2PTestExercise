@@ -6,4 +6,6 @@
     <string name="public_key_title">Public key: %s</string>
     <string name="mint_address_title">Mint address: %s</string>
     <string name="amount_title">Amount: %s</string>
+
+    <string name="default_error_message">Something went wrong</string>
 </resources>

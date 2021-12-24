@@ -4,6 +4,6 @@ import com.p2ptestexercise.model.ui.WalletUiModel
 
 interface WalletsView {
     fun showLoading(isLoading: Boolean)
-    fun showRefreshing(isRefreshing: Boolean)
+    fun showError(message: String)
     fun renderWallets(wallets: List<WalletUiModel>)
 }
