@@ -10,7 +10,6 @@ import com.p2ptestexercise.databinding.FragmentWalletsBinding
 import com.p2ptestexercise.model.ui.WalletUiModel
 import com.p2ptestexercise.ui.setVisible
 import com.p2ptestexercise.ui.wallets.presenter.WalletsPresenter
-import com.p2ptestexercise.util.WalletsDiffCallback
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 
@@ -38,11 +37,6 @@ class WalletsFragment : Fragment(R.layout.fragment_wallets), WalletsView {
         super.onViewCreated(view, savedInstanceState)
         binding.walletsRecyclerView.adapter = adapter
         binding.swipeToRefreshLayout.setOnRefreshListener { presenter.updateWallets() }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        presenter.getWallets()
     }
 
     override fun showLoading(isLoading: Boolean) {
