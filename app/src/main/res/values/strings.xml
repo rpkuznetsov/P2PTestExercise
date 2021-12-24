@@ -2,4 +2,8 @@
     <string name="app_name">P2PTestExercise</string>
     <string name="edit_text_seed_phrase_hint">Seed phrase</string>
     <string name="button_authorize_title">Authorize</string>
+
+    <string name="public_key_title">Public key: %s</string>
+    <string name="mint_address_title">Mint address: %s</string>
+    <string name="amount_title">Amount: %s</string>
 </resources>

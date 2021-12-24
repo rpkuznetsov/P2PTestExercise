@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import com.p2ptestexercise.R
 import com.p2ptestexercise.databinding.FragmentAuthorizationBinding
 import com.p2ptestexercise.ui.authorization.presenter.AuthorizationPresenter
 import com.p2ptestexercise.ui.setVisible
+import com.p2ptestexercise.ui.wallets.view.WalletsFragment
 import org.koin.android.ext.android.inject
 
 class AuthorizationFragment : Fragment(R.layout.fragment_authorization), AuthorizationView {
@@ -44,7 +46,9 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization), Authori
     }
 
     override fun navigateToNextScreen() {
-        Toast.makeText(requireContext(), "Authorization success", Toast.LENGTH_SHORT).show()
+        activity?.supportFragmentManager?.commit {
+            replace(R.id.fragment_container_view, WalletsFragment())
+        }
     }
 
     override fun showAuthorizationError() {
