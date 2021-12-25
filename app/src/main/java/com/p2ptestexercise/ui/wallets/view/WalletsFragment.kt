@@ -43,8 +43,8 @@ class WalletsFragment : Fragment(R.layout.fragment_wallets), WalletsView {
 
     override fun showLoading(isLoading: Boolean) = binding.run {
         when {
-            binding.swipeToRefreshLayout.isRefreshing -> binding.swipeToRefreshLayout.isRefreshing = isLoading
-            else -> binding.progressBar.setVisible(isLoading)
+            swipeToRefreshLayout.isRefreshing -> swipeToRefreshLayout.isRefreshing = isLoading
+            else -> progressBar.setVisible(isLoading)
         }
     }
 
