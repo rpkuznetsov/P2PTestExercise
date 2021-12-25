@@ -49,6 +49,7 @@ class WalletsFragment : Fragment(R.layout.fragment_wallets), WalletsView {
     }
 
     override fun renderWallets(wallets: List<WalletUiModel>) {
+        binding.noWalletsTextView.setVisible(wallets.isEmpty())
         adapter.setItems(wallets)
     }
 

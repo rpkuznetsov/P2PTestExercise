@@ -8,4 +8,5 @@
     <string name="amount_title">Amount: %s</string>
 
     <string name="default_error_message">Something went wrong</string>
+    <string name="no_wallets_title">No wallets on this account</string>
 </resources>
