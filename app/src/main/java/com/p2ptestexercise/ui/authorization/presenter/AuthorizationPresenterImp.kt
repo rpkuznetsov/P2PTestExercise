@@ -16,7 +16,7 @@ class AuthorizationPresenterImp(
 
     override fun onAuthorizeClick(seedPhrase: Editable?) {
         if (seedPhrase.isNullOrBlank()) {
-            view?.showAuthorizationError(stringService.getString(R.string.empty_seed_phrase_error_message))
+            view?.showError(stringService.getString(R.string.empty_seed_phrase_error_message))
             return
         }
 
@@ -27,7 +27,7 @@ class AuthorizationPresenterImp(
             switchToUI {
                 view?.showLoading(false)
                 if (success) view?.navigateToNextScreen()
-                else view?.showAuthorizationError(stringService.getString(R.string.authorization_error_message))
+                else view?.showError(stringService.getString(R.string.authorization_error_message))
             }
         }
     }

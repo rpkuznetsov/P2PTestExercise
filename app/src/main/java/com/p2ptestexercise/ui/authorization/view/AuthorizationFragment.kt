@@ -52,7 +52,7 @@ class AuthorizationFragment : Fragment(), AuthorizationView {
         }
     }
 
-    override fun showAuthorizationError(message: String) {
+    override fun showError(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
