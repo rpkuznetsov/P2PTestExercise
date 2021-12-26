@@ -15,7 +15,7 @@ class WalletsRepositoryImpl(
             method = METHOD,
             params = listOf(
                 publicKey,
-                mapOf(PROGRAM_ID to "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"),
+                mapOf(PROGRAM_ID to PROGRAM_ID_VALUE),
                 mapOf(ENCODING to JSON_PARSED)
             )
         )
@@ -28,5 +28,6 @@ class WalletsRepositoryImpl(
         private const val PROGRAM_ID = "programId"
         private const val ENCODING = "encoding"
         private const val JSON_PARSED = "jsonParsed"
+        private const val PROGRAM_ID_VALUE = "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
     }
 }
