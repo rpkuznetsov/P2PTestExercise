@@ -14,7 +14,7 @@ import com.p2ptestexercise.ui.wallets.presenter.WalletsPresenter
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 
-class WalletsFragment : Fragment(R.layout.fragment_wallets), WalletsView {
+class WalletsFragment : Fragment(), WalletsView {
 
     private lateinit var binding: FragmentWalletsBinding
     private val presenter by inject<WalletsPresenter<WalletsView>>()

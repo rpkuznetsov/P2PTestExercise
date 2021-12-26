@@ -14,7 +14,7 @@ import com.p2ptestexercise.ui.setVisible
 import com.p2ptestexercise.ui.wallets.view.WalletsFragment
 import org.koin.android.ext.android.inject
 
-class AuthorizationFragment : Fragment(R.layout.fragment_authorization), AuthorizationView {
+class AuthorizationFragment : Fragment(), AuthorizationView {
 
     private lateinit var binding: FragmentAuthorizationBinding
     private val presenter by inject<AuthorizationPresenter<AuthorizationView>>()
@@ -41,7 +41,8 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization), Authori
     }
 
     override fun showLoading(isLoading: Boolean) {
-        binding.authorizeButton.text = if (isLoading) null else getString(R.string.button_authorize_title)
+        binding.authorizeButton.text =
+            if (isLoading) null else getString(R.string.button_authorize_title)
         binding.progressBar.setVisible(isLoading)
     }
 

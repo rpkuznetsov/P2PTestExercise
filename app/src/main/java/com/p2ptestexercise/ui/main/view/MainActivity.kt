@@ -10,13 +10,12 @@ import com.p2ptestexercise.ui.main.presenter.MainPresenter
 import com.p2ptestexercise.ui.wallets.view.WalletsFragment
 import org.koin.android.ext.android.inject
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : AppCompatActivity(R.layout.activity_main), MainView {
 
     private val presenter by inject<MainPresenter<MainView>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         presenter.onAttach(this)
     }
 
