@@ -1,10 +1,9 @@
 package com.p2ptestexercise.ui.authorization.presenter
 
 import android.text.Editable
-import com.p2ptestexercise.ui.authorization.view.AuthorizationView
+import com.p2ptestexercise.ui.base.Presenter
+import com.p2ptestexercise.ui.base.View
 
-interface AuthorizationPresenter {
+interface AuthorizationPresenter<V: View> : Presenter<V> {
     fun onAuthorizeClick(text: Editable?)
-    fun onAttach(view: AuthorizationView)
-    fun onDetach()
 }

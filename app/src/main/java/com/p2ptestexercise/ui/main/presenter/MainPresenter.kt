@@ -1,8 +1,6 @@
 package com.p2ptestexercise.ui.main.presenter
 
-import com.p2ptestexercise.ui.main.view.MainView
+import com.p2ptestexercise.ui.base.Presenter
+import com.p2ptestexercise.ui.base.View
 
-interface MainPresenter {
-    fun onAttach(view: MainView)
-    fun onDetach()
-}
+interface MainPresenter<V : View> : Presenter<V>

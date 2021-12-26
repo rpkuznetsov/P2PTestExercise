@@ -1,7 +1,9 @@
 package com.p2ptestexercise.ui.authorization.view
 
-interface AuthorizationView {
+import com.p2ptestexercise.ui.base.View
+
+interface AuthorizationView : View {
     fun navigateToNextScreen()
-    fun showAuthorizationError()
+    fun showAuthorizationError(message: String)
     fun showLoading(isLoading: Boolean)
 }

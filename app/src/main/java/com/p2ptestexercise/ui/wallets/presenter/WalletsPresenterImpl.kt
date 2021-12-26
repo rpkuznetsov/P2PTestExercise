@@ -3,28 +3,16 @@ package com.p2ptestexercise.ui.wallets.presenter
 import com.p2ptestexercise.R
 import com.p2ptestexercise.interactor.wallets.WalletsInteractor
 import com.p2ptestexercise.model.ui.WalletsResult
+import com.p2ptestexercise.ui.base.BasePresenter
 import com.p2ptestexercise.ui.wallets.view.WalletsView
 import com.p2ptestexercise.util.StringService
 import com.p2ptestexercise.util.switchToUI
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class WalletsPresenterImpl(
     private val walletsInteractor: WalletsInteractor,
     private val stringService: StringService
-) : WalletsPresenter {
-
-    private var view: WalletsView? = null
-    private val job = SupervisorJob()
-    private val scope = CoroutineScope(Dispatchers.IO + job)
-
-    override fun onAttach(view: WalletsView) {
-        this.view = view
-        updateWallets()
-    }
+) : BasePresenter<WalletsView>(), WalletsPresenter<WalletsView> {
 
     override fun updateWallets() {
         scope.launch {
@@ -47,8 +35,14 @@ class WalletsPresenterImpl(
         }
     }
 
-    override fun onDetach() {
-        view = null
-        job.cancel()
+    override fun onLogOutClick(): Boolean {
+        scope.launch {
+            walletsInteractor.logOut()
+            switchToUI {
+                view?.routeToAuthorization()
+            }
+        }
+
+        return true
     }
 }

@@ -1,9 +1,9 @@
 package com.p2ptestexercise.ui.wallets.presenter
 
-import com.p2ptestexercise.ui.wallets.view.WalletsView
+import com.p2ptestexercise.ui.base.Presenter
+import com.p2ptestexercise.ui.base.View
 
-interface WalletsPresenter {
-    fun onAttach(view: WalletsView)
+interface WalletsPresenter<V : View> : Presenter<V> {
     fun updateWallets()
-    fun onDetach()
+    fun onLogOutClick(): Boolean
 }

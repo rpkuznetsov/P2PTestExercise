@@ -17,7 +17,7 @@ import org.koin.android.ext.android.inject
 class AuthorizationFragment : Fragment(R.layout.fragment_authorization), AuthorizationView {
 
     private lateinit var binding: FragmentAuthorizationBinding
-    private val presenter by inject<AuthorizationPresenter>()
+    private val presenter by inject<AuthorizationPresenter<AuthorizationView>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +51,8 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization), Authori
         }
     }
 
-    override fun showAuthorizationError() {
-        Toast.makeText(requireContext(), "Authorization error", Toast.LENGTH_SHORT).show()
+    override fun showAuthorizationError(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {

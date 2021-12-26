@@ -12,7 +12,7 @@ import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity(), MainView {
 
-    private val presenter by inject<MainPresenter>()
+    private val presenter by inject<MainPresenter<MainView>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

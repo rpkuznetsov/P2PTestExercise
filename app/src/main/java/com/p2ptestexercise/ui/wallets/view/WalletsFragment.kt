@@ -1,15 +1,14 @@
 package com.p2ptestexercise.ui.wallets.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import com.p2ptestexercise.R
 import com.p2ptestexercise.databinding.FragmentWalletsBinding
 import com.p2ptestexercise.model.ui.WalletUiModel
+import com.p2ptestexercise.ui.authorization.view.AuthorizationFragment
 import com.p2ptestexercise.ui.setVisible
 import com.p2ptestexercise.ui.wallets.presenter.WalletsPresenter
 import org.koin.android.ext.android.get
@@ -18,11 +17,12 @@ import org.koin.android.ext.android.inject
 class WalletsFragment : Fragment(R.layout.fragment_wallets), WalletsView {
 
     private lateinit var binding: FragmentWalletsBinding
-    private val presenter by inject<WalletsPresenter>()
+    private val presenter by inject<WalletsPresenter<WalletsView>>()
     private val adapter = WalletsAdapter(get())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         presenter.onAttach(this)
     }
 
@@ -39,6 +39,16 @@ class WalletsFragment : Fragment(R.layout.fragment_wallets), WalletsView {
         super.onViewCreated(view, savedInstanceState)
         binding.walletsRecyclerView.adapter = adapter
         binding.swipeToRefreshLayout.setOnRefreshListener { presenter.updateWallets() }
+        presenter.updateWallets()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.wallets_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.menu_log_out -> presenter.onLogOutClick()
+        else -> super.onOptionsItemSelected(item)
     }
 
     override fun showLoading(isLoading: Boolean) = binding.run {
@@ -55,6 +65,13 @@ class WalletsFragment : Fragment(R.layout.fragment_wallets), WalletsView {
 
     override fun showError(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun routeToAuthorization() {
+        activity?.supportFragmentManager?.commit {
+            replace(R.id.fragment_container_view, AuthorizationFragment())
+            remove(this@WalletsFragment)
+        }
     }
 
     override fun onDestroy() {

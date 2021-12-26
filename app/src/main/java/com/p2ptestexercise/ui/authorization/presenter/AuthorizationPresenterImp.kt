@@ -1,22 +1,18 @@
 package com.p2ptestexercise.ui.authorization.presenter
 
 import android.text.Editable
+import com.p2ptestexercise.R
 import com.p2ptestexercise.interactor.authorization.AuthorizationInteractor
 import com.p2ptestexercise.ui.authorization.view.AuthorizationView
+import com.p2ptestexercise.ui.base.BasePresenter
+import com.p2ptestexercise.util.StringService
 import com.p2ptestexercise.util.switchToUI
 import kotlinx.coroutines.*
 
 class AuthorizationPresenterImp(
-    private val authorizationInteractor: AuthorizationInteractor
-) : AuthorizationPresenter {
-
-    private var view: AuthorizationView? = null
-    private val job = SupervisorJob()
-    private val scope = CoroutineScope(Dispatchers.IO + job)
-
-    override fun onAttach(view: AuthorizationView) {
-        this.view = view
-    }
+    private val authorizationInteractor: AuthorizationInteractor,
+    private val stringService: StringService
+) : BasePresenter<AuthorizationView>(), AuthorizationPresenter<AuthorizationView> {
 
     override fun onAuthorizeClick(text: Editable?) {
         scope.launch {
@@ -26,13 +22,8 @@ class AuthorizationPresenterImp(
             switchToUI {
                 view?.showLoading(false)
                 if (success) view?.navigateToNextScreen()
-                else view?.showAuthorizationError()
+                else view?.showAuthorizationError(stringService.getString(R.string.authorization_error_message))
             }
         }
-    }
-
-    override fun onDetach() {
-        view = null
-        job.cancel()
     }
 }

@@ -15,20 +15,23 @@ import com.p2ptestexercise.interactor.wallets.WalletsInteractor
 import com.p2ptestexercise.interactor.wallets.WalletsInteractorImpl
 import com.p2ptestexercise.ui.authorization.presenter.AuthorizationPresenter
 import com.p2ptestexercise.ui.authorization.presenter.AuthorizationPresenterImp
+import com.p2ptestexercise.ui.authorization.view.AuthorizationView
 import com.p2ptestexercise.ui.main.presenter.MainPresenter
 import com.p2ptestexercise.ui.main.presenter.MainPresenterImpl
+import com.p2ptestexercise.ui.main.view.MainView
 import com.p2ptestexercise.ui.wallets.presenter.WalletsPresenter
 import com.p2ptestexercise.ui.wallets.presenter.WalletsPresenterImpl
+import com.p2ptestexercise.ui.wallets.view.WalletsView
 import com.p2ptestexercise.util.StringService
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val appModule = module {
-    single<MainPresenter> { MainPresenterImpl(get()) }
+    factory<MainPresenter<MainView>> { MainPresenterImpl(get()) }
 
-    single<AuthorizationPresenter> { AuthorizationPresenterImp(get()) }
+    factory<AuthorizationPresenter<AuthorizationView>> { AuthorizationPresenterImp(get(), get()) }
 
-    single<WalletsPresenter> { WalletsPresenterImpl(get(), get()) }
+    factory<WalletsPresenter<WalletsView>> { WalletsPresenterImpl(get(), get()) }
 
     single<MainInteractor> { MainInteractorImpl(get()) }
 
