@@ -5,5 +5,5 @@ import com.p2ptestexercise.ui.base.Presenter
 import com.p2ptestexercise.ui.base.View
 
 interface AuthorizationPresenter<V: View> : Presenter<V> {
-    fun onAuthorizeClick(text: Editable?)
+    fun onAuthorizeClick(seedPhrase: Editable?)
 }
