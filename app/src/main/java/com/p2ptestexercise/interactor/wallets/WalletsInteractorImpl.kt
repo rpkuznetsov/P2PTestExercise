@@ -29,6 +29,10 @@ class WalletsInteractorImpl(
         }
     }
 
+    override suspend fun logOut() {
+        authorizationRepository.removeAuthorizationData()
+    }
+
     private fun map(value: Value) = WalletUiModel(
         publicKey = value.pubkey,
         mintAddress = value.account.data.parsed.info.mint,
