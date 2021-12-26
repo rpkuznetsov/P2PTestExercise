@@ -7,5 +7,5 @@ class MainInteractorImpl(
 ) : MainInteractor {
 
     override suspend fun isAuthorized() =
-        authorizationRepository.getAuthorizationData() != null
+        authorizationRepository.getPubicKey() != null
 }

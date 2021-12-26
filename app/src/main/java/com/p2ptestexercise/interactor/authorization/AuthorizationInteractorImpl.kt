@@ -1,6 +1,5 @@
 package com.p2ptestexercise.interactor.authorization
 
-import com.p2ptestexercise.data.authorization.AuthorizationData
 import com.p2ptestexercise.data.authorization.AuthorizationRepository
 import com.p2ptestexercise.solanaj.Account
 import kotlinx.coroutines.Dispatchers
@@ -12,13 +11,8 @@ class AuthorizationInteractorImpl(
 
     override suspend fun authorizeViaSeedPhrase(words: List<String>) = withContext(Dispatchers.IO) {
         val account = Account.fromBip32Mnemonic(words)
-        val authorizationData = mapAccountToAuthorisationData(account)
-        repository.saveAuthorizationData(authorizationData)
+        val publicKey = account.publicKey.toString()
+        repository.savePublicKey(publicKey)
         return@withContext true
     }
-
-    private fun mapAccountToAuthorisationData(account: Account) = AuthorizationData(
-        publicKey = account.publicKey.toString(),
-        secretKey = account.secretKey.toString()
-    )
 }

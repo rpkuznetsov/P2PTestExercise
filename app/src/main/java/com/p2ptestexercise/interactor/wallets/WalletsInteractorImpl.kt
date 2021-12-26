@@ -19,7 +19,7 @@ class WalletsInteractorImpl(
             WalletsResult.Error(stringService.getString(R.string.default_error_message))
 
         val authorizationData =
-            authorizationRepository.getAuthorizationData() ?: return defaultError
+            authorizationRepository.getPubicKey() ?: return defaultError
 
         val response = walletsRepository.fetchWallets(authorizationData)
         return when {
@@ -30,7 +30,7 @@ class WalletsInteractorImpl(
     }
 
     override suspend fun logOut() {
-        authorizationRepository.removeAuthorizationData()
+        authorizationRepository.removePublicKey()
     }
 
     private fun map(value: Value) = WalletUiModel(

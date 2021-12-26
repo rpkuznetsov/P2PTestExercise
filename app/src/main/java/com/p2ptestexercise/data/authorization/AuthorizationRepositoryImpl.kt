@@ -7,22 +7,18 @@ class AuthorizationRepositoryImpl(
     private val sharedPreferences: SharedPreferences
 ) : AuthorizationRepository {
 
-    override suspend fun saveAuthorizationData(authorizationData: AuthorizationData) =
+    override suspend fun savePublicKey(publicKey: String) =
         sharedPreferences.edit {
-            putString(KEY_ACCOUNT_PUBLIC_KEY, authorizationData.publicKey)
-            putString(KEY_ACCOUNT_SECRET_KEY, authorizationData.secretKey)
+            putString(KEY_ACCOUNT_PUBLIC_KEY, publicKey)
             apply()
         }
 
-    override suspend fun getAuthorizationData(): AuthorizationData? = sharedPreferences.run {
-        val publicKey = getString(KEY_ACCOUNT_PUBLIC_KEY, null) ?: return null
-        val secretKey = getString(KEY_ACCOUNT_SECRET_KEY, null) ?: return null
-        AuthorizationData(publicKey, secretKey)
+    override suspend fun getPubicKey(): String? = sharedPreferences.run {
+        getString(KEY_ACCOUNT_PUBLIC_KEY, null)
     }
 
-    override suspend fun removeAuthorizationData() = sharedPreferences.edit {
+    override suspend fun removePublicKey() = sharedPreferences.edit {
         remove(KEY_ACCOUNT_PUBLIC_KEY)
-        remove(KEY_ACCOUNT_SECRET_KEY)
         apply()
     }
 }

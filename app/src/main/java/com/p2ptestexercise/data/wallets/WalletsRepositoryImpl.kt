@@ -1,6 +1,5 @@
 package com.p2ptestexercise.data.wallets
 
-import com.p2ptestexercise.data.authorization.AuthorizationData
 import com.p2ptestexercise.model.api.WalletsRequest
 import com.p2ptestexercise.model.api.WalletsResponse
 import java.util.*
@@ -9,13 +8,13 @@ class WalletsRepositoryImpl(
     private val api: Api
 ) : WalletsRepository {
 
-    override suspend fun fetchWallets(authorizationData: AuthorizationData): WalletsResponse {
+    override suspend fun fetchWallets(publicKey: String): WalletsResponse {
         val body = WalletsRequest(
             id = UUID.randomUUID().toString(),
             jsonrpc = JSON_RPC,
             method = METHOD,
             params = listOf(
-                authorizationData.publicKey,
+                publicKey,
                 mapOf(PROGRAM_ID to "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"),
                 mapOf(ENCODING to JSON_PARSED)
             )
