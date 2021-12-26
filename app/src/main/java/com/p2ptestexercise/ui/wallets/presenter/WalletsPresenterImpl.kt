@@ -7,7 +7,6 @@ import com.p2ptestexercise.ui.base.BasePresenter
 import com.p2ptestexercise.ui.wallets.view.WalletsView
 import com.p2ptestexercise.util.StringService
 import com.p2ptestexercise.util.switchToUI
-import kotlinx.coroutines.launch
 
 class WalletsPresenterImpl(
     private val walletsInteractor: WalletsInteractor,
@@ -15,7 +14,7 @@ class WalletsPresenterImpl(
 ) : BasePresenter<WalletsView>(), WalletsPresenter<WalletsView> {
 
     override fun updateWallets() {
-        scope.launch {
+        launch {
             try {
                 switchToUI { view?.showLoading(true) }
                 val walletsResult = walletsInteractor.getWallets()
@@ -36,7 +35,7 @@ class WalletsPresenterImpl(
     }
 
     override fun onLogOutClick(): Boolean {
-        scope.launch {
+        launch {
             walletsInteractor.logOut()
             switchToUI {
                 view?.routeToAuthorization()

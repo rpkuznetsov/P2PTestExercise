@@ -5,7 +5,6 @@ import com.p2ptestexercise.model.ui.Screen
 import com.p2ptestexercise.ui.base.BasePresenter
 import com.p2ptestexercise.ui.main.view.MainView
 import com.p2ptestexercise.util.switchToUI
-import kotlinx.coroutines.*
 
 class MainPresenterImpl(
     private val mainInteractor: MainInteractor
@@ -13,7 +12,7 @@ class MainPresenterImpl(
 
     override fun onAttach(view: MainView) {
         super.onAttach(view)
-        scope.launch {
+        launch {
             val screen = if (mainInteractor.isAuthorized()) Screen.Wallets else Screen.Authorization
             switchToUI { view.routeToScreen(screen) }
         }

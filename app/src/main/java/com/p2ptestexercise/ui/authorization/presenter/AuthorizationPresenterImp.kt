@@ -7,7 +7,6 @@ import com.p2ptestexercise.ui.authorization.view.AuthorizationView
 import com.p2ptestexercise.ui.base.BasePresenter
 import com.p2ptestexercise.util.StringService
 import com.p2ptestexercise.util.switchToUI
-import kotlinx.coroutines.launch
 
 class AuthorizationPresenterImp(
     private val authorizationInteractor: AuthorizationInteractor,
@@ -20,7 +19,7 @@ class AuthorizationPresenterImp(
             return
         }
 
-        scope.launch {
+        launch {
             switchToUI { view?.showLoading(true) }
             val words = seedPhrase?.toString()?.split(' ') ?: listOf()
             val success = authorizationInteractor.authorizeViaSeedPhrase(words)
